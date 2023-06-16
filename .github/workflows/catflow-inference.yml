@@ -42,8 +42,6 @@ jobs:
       with:
         path: ~/.cache/pypoetry
         key: ${{ runner.os }}-poetry-${{ hashFiles('**/pyproject.toml') }}
-        restore-keys: |
-          ${{ runner.os }}-poetry-
 
     - name: Install dependencies
       run: |
