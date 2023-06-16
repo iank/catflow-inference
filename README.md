@@ -36,7 +36,10 @@ poetry run ruff check .
 ```
 poetry build
 poetry export --without-hashes --format=requirements.txt > requirements.txt
-docker build -t iank1/catflow_inference:v0.1.0 .
+docker build -t iank1/catflow_inference:latest .
 ```
+
+Note that the docker build step will currently fail if there is more than one wheel version in `dist/`
+
 
 See [catflow-docker](https://github.com/iank/catflow-docker) for `docker-compose.yml`
