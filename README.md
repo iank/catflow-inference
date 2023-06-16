@@ -24,6 +24,8 @@ poetry run pytest
 
 ## Format/lint
 
+These are handled by pre-commit hooks.
+
 ```
 poetry run black .
 poetry run ruff check .

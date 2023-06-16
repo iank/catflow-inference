@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "catflow-inference"
-version = "0.1.0"
+version = "0.1.1"
 description = "Inference service for an object recognition pipeline"
 authors = ["Ian Kilgore <iank@iank.org>"]
 license = "MIT"
