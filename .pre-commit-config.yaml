@@ -8,7 +8,7 @@ repos:
     rev: '1.5'
     hooks:
       - id: poetry-check
-      - id: poetry-lock
+#      - id: poetry-lock
   - repo: https://github.com/psf/black
     rev: 23.3.0
     hooks:
@@ -19,3 +19,10 @@ repos:
     rev: v0.0.272
     hooks:
       - id: ruff
+  - repo: https://github.com/rafsaf/pyproject-tag-check
+    rev: "1.0.0"
+    hooks:
+      - id: pyproject-tag-check
+        always_run: true
+        args:
+          - https://github.com/rafsaf/pyproject-tag-check
