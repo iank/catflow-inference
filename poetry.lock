@@ -763,6 +763,32 @@ numpy = [
 ]
 
 [[package]]
+name = "opencv-python-headless"
+version = "4.7.0.72"
+description = "Wrapper package for OpenCV python bindings."
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "opencv-python-headless-4.7.0.72.tar.gz", hash = "sha256:eea59caa92b28b197f9d2a2dd8275ca3869718b2a857c8e53203de6ef3f9f4db"},
+    {file = "opencv_python_headless-4.7.0.72-cp37-abi3-macosx_10_16_x86_64.whl", hash = "sha256:2f8b60bddd325411cf4664e4dbea729ce20f0c2ffeaedc5c6724b544fdf36e8a"},
+    {file = "opencv_python_headless-4.7.0.72-cp37-abi3-macosx_11_0_arm64.whl", hash = "sha256:6e13954f705e640e52962dfb252ee1f0a0af7b33cdbe8dd73f27e7e31172b7a2"},
+    {file = "opencv_python_headless-4.7.0.72-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f448aea686069474e701223a2ed192df95f501a092b5e06e39171b4927564692"},
+    {file = "opencv_python_headless-4.7.0.72-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:18dac3147863d2f4beef6b06b784ee115799a7842e2883adc4ae750c432613f9"},
+    {file = "opencv_python_headless-4.7.0.72-cp37-abi3-win32.whl", hash = "sha256:f7f421a2099acbfb69db5e571abaf69a90f43846c3832452c19611efc2c6c926"},
+    {file = "opencv_python_headless-4.7.0.72-cp37-abi3-win_amd64.whl", hash = "sha256:388015ee96816b71e529fed6153aeb68420b69a80efad7aad5445fd7cd7a154c"},
+]
+
+[package.dependencies]
+numpy = [
+    {version = ">=1.21.2", markers = "python_version >= \"3.10\""},
+    {version = ">=1.21.4", markers = "python_version >= \"3.10\" and platform_system == \"Darwin\""},
+    {version = ">=1.22.0", markers = "python_version >= \"3.11\""},
+    {version = ">=1.19.3", markers = "python_version >= \"3.6\" and platform_system == \"Linux\" and platform_machine == \"aarch64\" or python_version >= \"3.9\""},
+    {version = ">=1.17.0", markers = "python_version >= \"3.7\""},
+    {version = ">=1.17.3", markers = "python_version >= \"3.8\""},
+]
+
+[[package]]
 name = "packaging"
 version = "23.1"
 description = "Core utilities for Python packages"
@@ -1424,13 +1450,13 @@ files = [
 
 [[package]]
 name = "ultralytics"
-version = "8.0.117"
+version = "8.0.118"
 description = "Ultralytics YOLOv8 for SOTA object detection, multi-object tracking, instance segmentation, pose estimation and image classification."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "ultralytics-8.0.117-py3-none-any.whl", hash = "sha256:bc2b59ac9a0524d05e77a39d3c1456cc33d73caa499aaf5641216aa76a0a9736"},
-    {file = "ultralytics-8.0.117.tar.gz", hash = "sha256:e24edc4035078daeaab604ce3eefef33ebfc42185f07d6827f09f9c334fb8f0b"},
+    {file = "ultralytics-8.0.118-py3-none-any.whl", hash = "sha256:c21e4bc5540caf86e6a49468b3e719d8ee370fe0662a0d1f91f51d604670eb81"},
+    {file = "ultralytics-8.0.118.tar.gz", hash = "sha256:42f3543a9a0867fc66af6620b0438dda5e853c65bf6b27dcf6c3f328e9adb882"},
 ]
 
 [package.dependencies]
@@ -1489,4 +1515,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "931f912b6d380df1a691711726643e9fdb304dc74e11150bac4ad0bc3f5bbb0c"
+content-hash = "aa7b51ba38cc05db61065c36ed316d1bc244753fd7d479aef43ea1b3e6583789"
