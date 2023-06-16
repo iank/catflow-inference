@@ -38,7 +38,7 @@ jobs:
         curl -sSL https://install.python-poetry.org | python3 -
 
     - name: Cache Poetry dependencies
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ~/.cache/pypoetry
         key: ${{ runner.os }}-poetry-${{ hashFiles('**/pyproject.toml') }}
