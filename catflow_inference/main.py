@@ -34,7 +34,7 @@ def load_config():
         # Load model
         pretrained_flag = os.getenv("YOLO_PRETRAINED")
         if pretrained_flag == "1":
-            MODEL = torch.hub.load("ultralytics/yolov5", "yolov5m")
+            MODEL = torch.hub.load("ultralytics/yolov5", "yolov5m", trust_repo=True)
         else:
             # Check for model weights
             model_weights = os.getenv("YOLO_WEIGHTS")
@@ -45,7 +45,9 @@ def load_config():
                     f"YOLO_WEIGHTS file '{model_weights}' not found."
                 )
 
-            MODEL = torch.hub.load("ultralytics/yolov5", "custom", path=model_weights)
+            MODEL = torch.hub.load(
+                "ultralytics/yolov5", "custom", path=model_weights, trust_repo=True
+            )
 
         # Set global threshold
         THRESHOLD = threshold
