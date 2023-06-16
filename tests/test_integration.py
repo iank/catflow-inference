@@ -19,9 +19,17 @@ def setup_environment():
     del os.environ["YOLO_THRESHOLD"]
 
 
-def test_predict_endpoint():
-    # This test checks the /predict endpoint
+def test_status_endpoint():
+    response = client.get("/status/")
+    assert response.status_code == 200
 
+    status = response.json()
+    assert status["model"] == "pretrained"
+    print(len(status["classes"]))
+    assert len(status["classes"]) == 80
+
+
+def test_predict_endpoint():
     # Prepare the test image
     with open("tests/test_images/wikipedia_cc_640x480.png", "rb") as image_file:
         image_bytes = image_file.read()
@@ -43,8 +51,6 @@ def test_predict_endpoint():
 
 
 def test_predict_draw_endpoint():
-    # This test checks the /predict/draw endpoint
-
     # Prepare the test image
     with open("tests/test_images/wikipedia_cc_640x480.png", "rb") as image_file:
         image_bytes = image_file.read()

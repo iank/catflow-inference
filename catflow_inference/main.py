@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Body
+from fastapi import FastAPI, Body, HTTPException
 from starlette.responses import StreamingResponse
 from PIL import Image
 import numpy as np
@@ -35,6 +35,7 @@ def load_config():
         pretrained_flag = os.getenv("YOLO_PRETRAINED")
         if pretrained_flag == "1":
             MODEL = torch.hub.load("ultralytics/yolov5", "yolov5m", trust_repo=True)
+            MODEL.catflow_name = "pretrained"
         else:
             # Check for model weights
             model_weights = os.getenv("YOLO_WEIGHTS")
@@ -48,6 +49,7 @@ def load_config():
             MODEL = torch.hub.load(
                 "ultralytics/yolov5", "custom", path=model_weights, trust_repo=True
             )
+            MODEL.catflow_name = model_weights
 
         # Set global threshold
         THRESHOLD = threshold
@@ -80,6 +82,16 @@ def get_predictions(model, image, threshold):
         boxes.append([x.item(), y.item(), width.item(), height.item()])
 
     return boxes, confidences, labels
+
+
+@app.get("/status/")
+async def read_status():
+    load_config()
+
+    if hasattr(MODEL, "names") and hasattr(MODEL, "catflow_name"):
+        return {"model": MODEL.catflow_name, "classes": MODEL.names}
+    else:
+        raise HTTPException(status_code=500, detail="model not loaded")
 
 
 @app.post("/predict/")
