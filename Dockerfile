@@ -14,8 +14,8 @@ ADD requirements.txt /app
 RUN pip install --no-cache-dir -r requirements.txt -f https://download.pytorch.org/whl/torch_stable.html
 
 # Install any needed packages specified in requirements.txt
-ADD dist/catflow_inference-0.1.0-py3-none-any.whl /app
-RUN pip install --no-cache-dir catflow_inference-0.1.0-py3-none-any.whl
+ADD dist/catflow_inference-*-py3-none-any.whl /app
+RUN pip install --no-cache-dir catflow_inference-*-py3-none-any.whl
 
 EXPOSE 5054
 
