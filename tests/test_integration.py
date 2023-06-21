@@ -3,6 +3,8 @@ from PIL import Image
 import io
 import os
 import pytest
+import json
+import base64
 from catflow_inference.main import app
 
 client = TestClient(app)
@@ -42,12 +44,8 @@ def test_predict_endpoint():
     assert response.status_code == 200
 
     predictions = response.json()
-    assert "boxes" in predictions
-    assert "confidences" in predictions
-    assert "classes" in predictions
-
-    assert len(predictions["classes"]) == 1
-    assert "car" in predictions["classes"]
+    assert len(predictions) == 1
+    assert predictions[0]["label"] == "car"
 
 
 def test_predict_draw_endpoint():
@@ -66,3 +64,44 @@ def test_predict_draw_endpoint():
     image_stream = io.BytesIO(response.content)
     image = Image.open(image_stream)
     assert image.format == "PNG"
+
+
+def test_motion_endpoint():
+    """Test that the /motion/ endpoint detects the car in this video and returns
+    appropriate metadata"""
+    with open("tests/test_images/car.mp4", "rb") as video_file:
+        file_data = {"file": video_file}
+        class_data = {"classes": json.dumps(["car", "cat"])}
+        response = client.post("/motion/", files=file_data, data=class_data)
+        assert response.status_code == 200
+
+    data = json.loads(response.content)
+    assert "detections" in data
+    assert "label" in data
+    assert "image" in data
+
+    print(f"Found {data['detections']} instances of {data['label']}")
+    assert data["detections"] == 11
+    assert data["label"] == "car"
+
+    content = base64.b64decode(data["image"])
+    image = Image.open(io.BytesIO(content))
+    assert image.format == "PNG"
+    assert image.size == (640, 480)
+
+
+def test_motion_endpoint_class_filter():
+    """As above, but we should get no detections as we're not looking for cars"""
+    with open("tests/test_images/car.mp4", "rb") as video_file:
+        file_data = {"file": video_file}
+        class_data = {"classes": json.dumps(["cat", "capybara"])}
+        response = client.post("/motion/", files=file_data, data=class_data)
+        assert response.status_code == 200
+
+    data = json.loads(response.content)
+    assert "detections" in data
+    assert "label" in data
+    assert "image" in data
+
+    assert data["detections"] == 0
+    assert data["label"] == ""

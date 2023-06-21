@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "catflow-inference"
-version = "0.1.1"
+version = "0.2.0"
 description = "Inference service for an object recognition pipeline"
 authors = ["Ian Kilgore <iank@iank.org>"]
 license = "MIT"
@@ -8,7 +8,7 @@ readme = "README.md"
 packages = [{include = "catflow_inference"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.10,<3.12"
 fastapi = "^0.97.0"
 numpy = "^1.24.3"
 Pillow = "^9.5.0"
@@ -22,6 +22,9 @@ tqdm = "^4.65.0"
 pyyaml = "^6.0"
 ultralytics = "^8.0.117"
 opencv-python-headless = "^4.7.0.72"
+frameextractor = {git = "https://github.com/iank/catflow-frameextractor", rev = "v0.5.5"}
+aiofiles = "^23.1.0"
+python-multipart = "^0.0.6"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
